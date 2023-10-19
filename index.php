@@ -1,6 +1,11 @@
 
 <?php
 
+/**
+* Create by Bitts
+* Objetivo: relembrar alguns conceitos de consulta de webservices usando PHP e jQuery
+*/
+
 //Buscando conteudo para popular o Select com as cidades de ORIGEM
 $url_localidades = 'https://muviflex.com.br/api/venda-de-passagem/localidades-de-origem?isMuvibus=false&isPublicBody=false&userID=null'; 
 $localidades_de_origem = file_get_contents($url_localidades);
@@ -269,7 +274,7 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                 });
                 
                 
-                console.log(itens);
+                //console.log(itens);
                 
                 var colunas = 3;
                 var linhas = 20;
@@ -305,9 +310,9 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                 
             }
         
-			$(document).ready(function() {
+	    $(document).ready(function() {
 			    
-			    $("input[name*='data']").mask("99/99/9999", {placeholder: 'MM/DD/YYYY' }).val(getActualDate());
+	    	$("input[name*='data']").mask("99/99/9999", {placeholder: 'MM/DD/YYYY' }).val(getActualDate());
                 
                 $('.localidades').on("change", function() {
                 
@@ -352,11 +357,6 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                     
                     var tripdate = moment( $("input[name='data_ida']").val() , "DD/MM/YYYY").format('YYYY-MM-DD');
                     //var tripdate = $.datepicker.formatDate( "dd-MM-yyyy", $("input[name='data_ida']").val() );
-                    
-                    var d = new Date();
-                    var day = addZero(d.getDate());
-                    var month = addZero(d.getMonth()+1);
-                    var year = addZero(d.getFullYear());
 
 
                     var destinationLocalityId = $('.destinos').find('option:selected').val();
@@ -367,8 +367,7 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                         type: "get",
                         data: {
                             'originLocalityId': id, 
-                            'originIbgeCode' : ibgeCode,
-                            
+                            'originIbgeCode' : ibgeCode,                            
                             'tripdate' : tripdate,
                             'destinationLocalityId' : destinationLocalityId,
                             'destinationIbgeCode' : destinationIbgeCode,
@@ -376,7 +375,7 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                         },
                         dataType: 'json',
                         success: function (result) {
-                            //console.log(result)
+
                             if(result && result.data){
                                 $.each(result.data.ticketRoutes, function (key, value) {
                                     let arrival = moment( value.arrival ).format('HH:mm:ss DD/MM/YYYY');
@@ -411,8 +410,7 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                                                         
                                                 
                                                     }
-                                                })
-                                                
+                                                });                                                
                                                 
                                             })
                                         )
@@ -446,7 +444,7 @@ else if(isset($_REQUEST['originLocalityId']) && isset($_REQUEST['originIbgeCode'
                     });
                 });
                 
-			});
+	     });
         </script>
     </head>
     
